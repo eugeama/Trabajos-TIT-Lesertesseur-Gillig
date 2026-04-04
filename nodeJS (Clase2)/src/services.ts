@@ -1,40 +1,40 @@
-function agregarTarea(tarea){
-    tareas= [...tareas, tarea];
+import type { tarea, Prioridad } from "./TareaInterface";
+
+let tareas: tarea[] = [];
+
+export function agregarTarea(tarea: tarea): tarea[] {
+    tareas = [...tareas, tarea];
     return tareas;
 }
 
-function eliminarTarea(id){
+export function eliminarTarea(id: number): tarea[] {
     tareas = tareas.filter(t => t.idTarea !== id);
     return tareas;
 }
 
-function actualizarTarea(tareaActualizar){
-    const tareaActualizada = 
-    tareas.map(t => tareaActualizar.id === t.id) ?
-    {...t, ...tareaActualizar} : t;
-    
-    tareas = tareaActualizada;
+export function actualizarTarea(tareaActualizar: Partial<tarea> & { idTarea: number }): tarea[] {
+    tareas = tareas.map(t =>
+        t.idTarea === tareaActualizar.idTarea
+            ? { ...t, ...tareaActualizar }
+            : t
+    );
     return tareas;
 }
 
-function actualizarPrioridad(id, prioridad){
-        const tareaActualizada = tareas.map(t => 
+export function actualizarPrioridad(id: number, prioridad: Prioridad): tarea[] {
+    tareas = tareas.map(t =>
         t.idTarea === id
-            ? {...t, prioridad: prioridad} 
+            ? { ...t, prioridad }
             : t
     );
-    
-    tareas = tareaActualizada;
     return tareas;
 }
 
-function completarTarea(tarea){
-    const tareaActualizada = tareas.map(t => 
-        t.idTarea === tarea.idTarea 
-            ? {...t, fechaFinalizacion: new Date()} 
+export function completarTarea(tarea: tarea): tarea[] {
+    tareas = tareas.map(t =>
+        t.idTarea === tarea.idTarea
+            ? { ...t, fechaFinalizacion: new Date() }
             : t
     );
-    
-    tareas = tareaActualizada;
     return tareas;
 }
