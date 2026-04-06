@@ -35,11 +35,16 @@ function App() {
     setMostrarPopUp(false)
   }
   return (
+    
     <div> 
       <section id="center">
         <div>
           <h1>Gestor de tareas</h1>
         </div>
+      </section>
+
+      <section className='navegacion'>
+        
       </section>
 
       <section>
