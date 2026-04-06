@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import Tabla from './components/Tabla';
+import PopUp from './components/PopUp';
 
 interface Tarea{
   titulo: string;
@@ -51,87 +53,19 @@ function App() {
         </div>
       </section>
 
+          {/* TABLA */}
       <section id="center">
-        <table className='table'>
-          <thead>
-            <tr>  
-              <th>Id</th>
-              <th>Título</th>
-              <th>Estado</th>
-              <th>Prioridad</th>
-              <th>Completada</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            {
-              tareas?.map((tarea) => {
-                return(
-                  <tr key={tarea.id} onClick={() => {
-                    console.log("clkick en la fila -> ", tarea.id)
-                    const tareaEncontrada = tareas.find((fila) => {
-                      return fila.id === tarea.id
-                    })
-                    if(tareaEncontrada){
-                      tareaEncontrada.completa = !tareaEncontrada.completa
-                    }
-                      setTareas([...tareas])
-                  }}>  
-                    <td>{tarea.id}</td>
-                    <td>{tarea.titulo}</td>
-                    <td>{tarea.estado}</td>
-                    <td>{tarea.prioridad}</td>
-                    <td>{tarea.completa ? "COMPLETADA" : ""}</td>
-                  </tr>
-                );
-              })
-            }
-            
-          </tbody>
-        </table>
+        <Tabla tareas={tareas} setTareas={setTareas} />
       </section>
 
       {mostrarPopUp === true 
       ?
-      <div className='overlay'>
-        <div className='popup' >
-         <form action={onSubmit}>
-          
-          <div className='formLine'>
-            <label className='formLabel'>Id</label>
-            <input type="text" name="id" required/>
-          </div>
-          
-          <div className='formLine'>
-            <label className='formLabel'>Titulo</label>
-            <input type="text" name="titulo" required/>
-          </div>
 
-          <div className='formLine'>
-            <label className='formLabel'>Estado</label>
-            <input type="text"  name="estado" required/>
-          </div>
-                    
-          <div className='formLine'>
-            <label className='formLabel'>Prioridad</label>
-            <input type="text" name="prioridad" required/>
-          </div>
+            // POPUP
+      <section>
+        <PopUp onSubmit={onSubmit} setMostrarPopUp={setMostrarPopUp} />
+      </section>
 
-          <div className='buttonbar'>
-            <button className='button' type='submit'>
-              Aceptar 
-            </button>
-            
-            <button className='button' onClick={() => {
-              setMostrarPopUp(false);
-            }}>
-              Cerrar 
-            </button>
-          </div>
-         </form>
-
-        </div>
-      </div>
       : null}
     </div>
   )
