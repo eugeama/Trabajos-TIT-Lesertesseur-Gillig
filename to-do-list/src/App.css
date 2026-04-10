@@ -73,6 +73,7 @@
 
 #toolbar {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   gap: 25px;
   place-content: left;
@@ -223,6 +224,28 @@
       background-color: rgb(117, 79, 220);
     }
 
+  }
+  
+.select {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+  
+.search {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
   }
 
 table {

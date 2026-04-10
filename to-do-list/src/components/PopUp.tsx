@@ -3,7 +3,11 @@ interface PopUpProps {
   setMostrarPopUp: (valor: boolean) => void;
 }
 
-function PopUp({ onSubmit, setMostrarPopUp }: PopUpProps) {
+function PopUp({
+  onSubmit, 
+  setMostrarPopUp
+ }: PopUpProps) {
+
   return (
     <div className='overlay'>
       <div className='popup'>
@@ -30,7 +34,7 @@ function PopUp({ onSubmit, setMostrarPopUp }: PopUpProps) {
           </div>
 
           <div className='buttonbar'>
-            <button className='button' type='submit'>
+            <button className='button' type='submit' >
               Aceptar
             </button>
 
