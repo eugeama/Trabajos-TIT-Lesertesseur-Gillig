@@ -3,7 +3,7 @@ interface ToolbarProps {
   onOrdenarPrioridad: () => void;
   setTextoIngresado: (textoIngresado: string) => void;
   setEstadoSeleccionado: (estadoSeleccionado: string) => void;
-  filtrar: () => void;
+  onFiltrar: () => void;
   estadoSeleccionado: string;
   textoIngresado: string;
 }
@@ -13,7 +13,7 @@ export const Toolbar = ({
   onOrdenarPrioridad,
   setTextoIngresado,
   setEstadoSeleccionado,
-  filtrar,
+  onFiltrar,
   estadoSeleccionado,
   textoIngresado,
 }: ToolbarProps) => {
@@ -66,7 +66,7 @@ export const Toolbar = ({
           className="button"
           style={{ marginLeft: 5 }}
           onClick={() => {
-            filtrar();
+            onFiltrar();
           }}
         >
           Filtrar

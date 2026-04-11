@@ -15,22 +15,22 @@ function PopUp({
 
           <div className='formLine'>
             <label className='formLabel'>Id</label>
-            <input type="text" name="id" required />
+            <input type="text" name="id" required className="inputData"/>
           </div>
 
           <div className='formLine'>
             <label className='formLabel'>Titulo</label>
-            <input type="text" name="titulo" required />
+            <input type="text" name="titulo" required className="inputData"/>
           </div>
 
           <div className='formLine'>
             <label className='formLabel'>Estado</label>
-            <input type="text" name="estado" required />
+            <input type="text" name="estado" required className="inputData"/>
           </div>
 
           <div className='formLine'>
             <label className='formLabel'>Prioridad</label>
-            <input type="text" name="prioridad" required />
+            <input type="text" name="prioridad" required className="inputData"/>
           </div>
 
           <div className='buttonbar'>

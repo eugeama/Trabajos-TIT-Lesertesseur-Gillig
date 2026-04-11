@@ -248,6 +248,18 @@
     text-decoration: none;
   }
 
+.inputData {
+    color: var(--text-h);
+    font-size: 16px;
+    flex-grow: 1;
+    border-radius: 6px;
+    background: var(--social-bg);
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;

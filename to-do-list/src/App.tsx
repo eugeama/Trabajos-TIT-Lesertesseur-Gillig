@@ -69,8 +69,9 @@ function App() {
         tareaEncontrada.estado = "Pendiente";
       }
     }
-    setTareas([...tareas]);
-    filtrar();
+    const nuevasTareas = [...tareas];
+    setTareas(nuevasTareas);
+    filtrar(nuevasTareas);
   }
 
   async function onSubmit(formData: FormData) {
@@ -87,9 +88,10 @@ function App() {
       completa: false,
     };
 
-    setTareas([...tareas, nuevaTarea]);
+    const nuevasTareas = [...tareas, nuevaTarea];
+    setTareas(nuevasTareas);
+    filtrar(nuevasTareas);
     setMostrarPopUp(false);
-    filtrar();
   }
 
   function filtrarPorNombre(listaTareas: Tarea[]) {
@@ -107,7 +109,8 @@ function App() {
     }
   }
 
-  function filtrar() {
+  function filtrar(tareas: Tarea[]) {
+    console.log("tareas.length -> ", tareas.length);
     if (estadoSeleccionado === "Todos") {
       filtrarPorNombre(tareas);
     } else {
@@ -138,7 +141,9 @@ function App() {
           onOrdenarPrioridad={onOrdenarPrioridad}
           setEstadoSeleccionado={setEstadoSeleccionado}
           setTextoIngresado={setTextoIngresado}
-          filtrar={filtrar}
+          onFiltrar={() => {
+            filtrar(tareas);
+          }}
           estadoSeleccionado={estadoSeleccionado}
           textoIngresado={textoIngresado}
         />
