@@ -1,16 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Tabla from "./components/Tabla";
 import PopUp from "./components/PopUp";
 import { Toolbar } from "./components/Toolbar";
-
-interface Tarea {
-  titulo: string;
-  id: number;
-  prioridad: "Baja" | "Media" | "Alta";
-  estado: "Pendiente" | "Terminado";
-  completa: boolean;
-}
+import type { Tarea } from "./types/tareas";
 
 const pesosPrioridad = {
   Alta: 1,
@@ -42,11 +35,29 @@ const pesosPrioridad = {
 // ];
 
 function App() {
-  const [tareas, setTareas] = useState<Tarea[]>([]);
-  const [tareasFiltradas, setTareasFiltradas] = useState<Tarea[]>([]);
+  function getLocalStorageData() {
+    const localStorageTareas = localStorage.getItem("localStorageTareas");
+    const tareas = localStorageTareas ? (JSON.parse(localStorageTareas) as Tarea[]) : [];
+    return tareas;
+  }
+
+  const [tareas, setTareas] = useState<Tarea[]>(() => {
+    const ret = getLocalStorageData();
+    return ret;
+  });
+  const [tareasFiltradas, setTareasFiltradas] = useState<Tarea[]>(() => {
+    const ret = getLocalStorageData();
+    return ret;
+  });
+
   const [mostrarPopUp, setMostrarPopUp] = useState<boolean>(false);
   const [textoIngresado, setTextoIngresado] = useState("");
   const [estadoSeleccionado, setEstadoSeleccionado] = useState("Todos");
+
+  useEffect(() => {
+    // console.log("useEffect tareas -> ", tareas)
+    localStorage.setItem("localStorageTareas", JSON.stringify(tareas));
+  }, [tareas]);
 
   function onOrdenarPrioridad() {
     tareasFiltradas.sort((a: Tarea, b: Tarea) => {
@@ -74,24 +85,12 @@ function App() {
     filtrar(nuevasTareas);
   }
 
-  async function onSubmit(formData: FormData) {
-    const id = formData.get("id") as string;
-    const titulo = formData.get("titulo") as string;
-    const prioridad = formData.get("prioridad") as Tarea["prioridad"];
-    const estado = formData.get("estado") as Tarea["estado"];
-
-    const nuevaTarea: Tarea = {
-      id: parseInt(id),
-      titulo: titulo,
-      prioridad: prioridad,
-      estado: estado,
-      completa: false,
-    };
-
+  async function onAgregarTarea(nuevaTarea: Tarea) {
     const nuevasTareas = [...tareas, nuevaTarea];
     setTareas(nuevasTareas);
     filtrar(nuevasTareas);
     setMostrarPopUp(false);
+    // const localStorageTareas = localStorage.getItem('localStorageTareas');
   }
 
   function filtrarPorNombre(listaTareas: Tarea[]) {
@@ -157,7 +156,7 @@ function App() {
       {mostrarPopUp === true ? (
         // POPUP
         <section>
-          <PopUp onSubmit={onSubmit} setMostrarPopUp={setMostrarPopUp} />
+          <PopUp onAgregarTarea={onAgregarTarea} setMostrarPopUp={setMostrarPopUp} />
         </section>
       ) : null}
     </div>
