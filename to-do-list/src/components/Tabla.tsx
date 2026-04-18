@@ -33,8 +33,8 @@ function Tabla({ tareas, marcarTareaCompletada }: TablaProps) {
                 marcarTareaCompletada(tarea.id);
               }}
             >
-              <td>{tarea.id}</td>
-              <td>{tarea.titulo}</td>
+              <td align="right">{tarea.id}</td>
+              <td align="left">{tarea.titulo}</td>
               <td>{tarea.estado}</td>
               <td>{tarea.prioridad}</td>
               <td>{tarea.completa ? "COMPLETADA" : ""}</td>
